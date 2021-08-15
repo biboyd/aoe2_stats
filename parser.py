@@ -27,7 +27,11 @@ def get_panda(game_list, nvar, ngames):
 
         gdata= gdata[:-1].split(',')
         gvar=len(gdata)
-        p1string, p2string = combined_pdata[3:-2].split('},{')
+        #import pdb; pdb.set_trace()
+        if len(combined_pdata[3:-2].split('},{')) >2:
+            continue
+        else:
+            p1string, p2string = combined_pdata[3:-2].split('},{')
         p1data= p1string.split(",")
         p2data= p2string.split(",")
         pvar=len(p1data)
@@ -64,7 +68,8 @@ def get_panda(game_list, nvar, ngames):
 if __name__ == '__main__':
     game_file=parse_games_file("data.txt")
     ngames = len(game_file)
-    nvar=74 #should be fixed
+    print("games: ", ngames)
+    nvar=76 #should be fixed
     df= get_panda(game_file,nvar, ngames)
 
     df.to_csv("data_frame.csv")
